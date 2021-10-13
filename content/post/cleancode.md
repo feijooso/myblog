@@ -18,7 +18,7 @@ Existe una teoría llamada "Broken Window Theory", formulada en los ochenta por 
 
 En definitiva, el desorden invita a más desorden. Y exactamente esto sucede cuando programamos: un código desprolijo probablemente continúe empeorando con el tiempo. En cambio, si trabajamos con un código limpio es mucho más fácil seguir las mismas lógicas.
 
-Pero, ¿qué es el código limpio? Como casi todo en la vida, su definición es un poco ambigua y depende generalmente del contexto. Pero para comenzar, podemos establecer algunos puntos clave para identificarlo:
+Pero, ¿qué es el código limpio? Como casi todo en la vida, su definición es un poco ambigua y depende generalmente del contexto. Pero para comenzar podemos establecer algunos puntos clave para identificarlo:
 
 1. Es fácil de comprender, tanto para unx como para otrxs.
 2. No está duplicado.
