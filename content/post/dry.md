@@ -1,89 +1,34 @@
 +++
-title = "Getting Started with Hugo"
+title = "DRY Principle"
 description = ""
 tags = [
-    "go",
-    "golang",
-    "hugo",
-    "development",
+    "DRY",
 ]
-date = "2014-04-02"
+date = "2021-10-18"
 categories = [
     "Development",
-    "golang",
 ]
 menu = "main"
 +++
 
-## Step 1. Install Hugo
 
-Goto [hugo releases](https://github.com/spf13/hugo/releases) and download the
-appropriate version for your os and architecture.
+# DRY PRINCIPLE
 
-Save it somewhere specific as we will be using it in the next step.
+Muchxs conocerán el principio DRY (Don't Repeat Yourself). Para quienes no, es un principio de software que nos ayuda a luchar contra el código repetido. Así tendremos código limpio, mantenible y fácil de leer. Pareciera ser simple, hasta acá todo bien. 
 
-More complete instructions are available at [installing hugo](/overview/installing/)
+Lo que nadie nos dijo es que Andy Hunt y Dave Thomas, los creadores de DRY, se referían a duplicaciones de conocimiento, no de código en sí. Esto llevó a que muchas veces lo apliquemos de manera incorrecta.  
 
-## Step 2. Build the Docs
+A ver. Existe lo que se llama **incidental duplication**. Es código que se ve casi igual pero representa diferentes comportamientos del sistema. En términos de código sí está duplicado, pero en términos de comportamiento no. Por ejemplo:  
 
-Hugo has its own example site which happens to also be the documentation site
-you are reading right now.
+    fun moveForward(position: Pair<Int, Int>) = Pair(position.first - 1, position.second)
+    fun moveBackwards(position: Pair<Int, Int>) = Pair(position.first + 1, position.second)
 
-Follow the following steps:
+Poniendonos en contexto, la idea era armar una api para enviarle comandos a un robot y que este se mueva. Obviemos el resto de la implementación y los posibles errores del modelo. Vemos que la primera función avanza un paso hacia adelante, y la segunda retrocede un paso hacia atrás. Son casi iguales. Apenas las vi dije "código duplicado, esto está mal" y me precipité a armar algo de este estilo:
 
- 1. Clone the [hugo repository](https://github.com/spf13/hugo)
- 2. Go into the repo
- 3. Run hugo in server mode and build the docs
- 4. Open your browser to http://localhost:1313
+    fun move(position: Pair<Int, Int>, step: Int) = Pair(position.first + step, position.second)
 
-Corresponding pseudo commands:
+Me pareció una buena idea. También pensé en agregarle otro step para caminar hacia los costados (y modificar position.second). Listo, 4 pájaros de un tiro.
 
-    git clone https://github.com/spf13/hugo
-    cd hugo
-    /path/to/where/you/installed/hugo server --source=./docs
-    > 29 pages created
-    > 0 tags index created
-    > in 27 ms
-    > Web Server is available at http://localhost:1313
-    > Press ctrl+c to stop
+El problema empezó cuando quise agregar más funcionalidades. La función unificada *move* me empezó a molestar, era poco clara. Estaba esforzándome en mantener una unión sintáctica pero cada movimiento quería seguir evolucionando de manera distinta. No debería haber fusionado esas funciones para cada dirección de movimiento ya que si bien eran muy similares, no repetían comportamiento. 
 
-Once you've gotten here, follow along the rest of this page on your local build.
-
-## Step 3. Change the docs site
-
-Stop the Hugo process by hitting ctrl+c.
-
-Now we are going to run hugo again, but this time with hugo in watch mode.
-
-    /path/to/hugo/from/step/1/hugo server --source=./docs --watch
-    > 29 pages created
-    > 0 tags index created
-    > in 27 ms
-    > Web Server is available at http://localhost:1313
-    > Watching for changes in /Users/spf13/Code/hugo/docs/content
-    > Press ctrl+c to stop
-
-
-Open your [favorite editor](http://vim.spf13.com) and change one of the source
-content pages. How about changing this very file to *fix the typo*. How about changing this very file to *fix the typo*.
-
-Content files are found in `docs/content/`. Unless otherwise specified, files
-are located at the same relative location as the url, in our case
-`docs/content/overview/quickstart.md`.
-
-Change and save this file.. Notice what happened in your terminal.
-
-    > Change detected, rebuilding site
-
-    > 29 pages created
-    > 0 tags index created
-    > in 26 ms
-
-Refresh the browser and observe that the typo is now fixed.
-
-Notice how quick that was. Try to refresh the site before it's finished building.. I double dare you.
-Having nearly instant feedback enables you to have your creativity flow without waiting for long builds.
-
-## Step 4. Have fun
-
-The best way to learn something is to play with it.
+En conclusión, hay que saber distinguir en qué momento estamos repitiendo código y en qué momento el comportamiento cambia (aunque sea similar) para no complicar el mantenimiento del sistema.
