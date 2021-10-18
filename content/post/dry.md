@@ -12,8 +12,6 @@ menu = "main"
 +++
 
 
-# DRY PRINCIPLE
-
 Muchxs conocerán el principio DRY (Don't Repeat Yourself). Para quienes no, es un principio de software que nos ayuda a luchar contra el código repetido. Así tendremos código limpio, mantenible y fácil de leer. Pareciera ser simple, hasta acá todo bien. 
 
 Lo que nadie nos dijo es que Andy Hunt y Dave Thomas, los creadores de DRY, se referían a duplicaciones de conocimiento, no de código en sí. Esto llevó a que muchas veces lo apliquemos de manera incorrecta.  
@@ -31,4 +29,4 @@ Me pareció una buena idea. También pensé en agregarle otro step para caminar 
 
 El problema empezó cuando quise agregar más funcionalidades. La función unificada *move* me empezó a molestar, era poco clara. Estaba esforzándome en mantener una unión sintáctica pero cada movimiento quería seguir evolucionando de manera distinta. No debería haber fusionado esas funciones para cada dirección de movimiento ya que si bien eran muy similares, no repetían comportamiento. 
 
-En conclusión, hay que saber distinguir en qué momento estamos repitiendo código y en qué momento el comportamiento cambia (aunque sea similar) para no complicar el mantenimiento del sistema.
+En conclusión, hay que saber distinguir en qué momento estamos repitiendo sintaxis y en qué momento el comportamiento cambia (aunque sea similar) para tener código mantenible.
