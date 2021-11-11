@@ -29,11 +29,12 @@ La kata consiste en implementar una especie de red social por consola. Tiene var
 ![architecture-skeleton](/social-network-architecture.png)
 
 Analicemos las partes: 
-    1. Domain: es donde viven las entidades de negocio, por ejemplo los usuarios.
-    2. Infrastructure: adapters para la base de datos
-    3. Use Cases: son las reglas de negocio de la aplicación. Por ejemplo Login, o Sign Up en este caso. 
-    4. UI: interpreta el input del usuario e identifica el caso de uso a llamar. En este caso la UI es la consola
-    5. Main: inicializa la aplicación
+
+1. Domain: es donde viven las entidades de negocio, por ejemplo los usuarios.
+2. Infrastructure: adapters para la base de datos
+3. Use Cases: son las reglas de negocio de la aplicación. Por ejemplo Login, o Sign Up en este caso. 
+4. UI: interpreta el input del usuario e identifica el caso de uso a llamar. En este caso la UI es la consola
+5. Main: inicializa la aplicación
 
 Es importante que el esquema tenga las dependencias bien direccionadas. 
 
@@ -44,9 +45,9 @@ Empezamos con un test **end-to-end** que testee el login. El test debe verificar
     @Test
     fun login() {
         input.willRead("login user password")
-     
+    
         console.run()
-     
+    
         assertThat(output.content).isEqualTo("Login successful")
     }
 
