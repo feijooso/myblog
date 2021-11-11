@@ -30,10 +30,14 @@ La kata consiste en implementar una especie de red social por consola. Tiene var
 
 Analicemos las partes: 
 
-1. Domain: es donde viven las entidades de negocio, por ejemplo los usuarios.
+1. Domain: es donde viven las entidades de negocio, por ejemplo los usuarios
+
 2. Infrastructure: adapters para la base de datos
-3. Use Cases: son las reglas de negocio de la aplicación. Por ejemplo Login, o Sign Up en este caso. 
+
+3. Use Cases: son las reglas de negocio de la aplicación. Por ejemplo Login, o Sign Up en este caso
+
 4. UI: interpreta el input del usuario e identifica el caso de uso a llamar. En este caso la UI es la consola
+
 5. Main: inicializa la aplicación
 
 Es importante que el esquema tenga las dependencias bien direccionadas. 
@@ -95,7 +99,7 @@ A este objeto LoginHandler lo diseñamos usando **TDD**. Verificamos que llame a
         private val loginHandler = LoginHandler(login)
     }
 
-Creando este LoginHandler aparece el objeto Login. El usuario es capaz de ingresar el comando, y la consola es capaz de interpretarlo. Cuando lo interprete llamará al caso de uso Login que es quien conoce a las entidades del domain necesarias para ejecutarlo. 
+Creando este LoginHandler aparece el usecase Login. Como aún no está implementado, lo mockeamos. Ahora el usuario es capaz de ingresar el comando y la consola es capaz de interpretarlo. Cuando lo interprete llamará al caso de uso Login que es quien debería conocer a las entidades del domain necesarias para ejecutarlo. 
 
 Diseñamos el use case Login con TDD y de paso creamos el User en el domain. También nos topamos con el repositorio (que será InMemory por ahora).
 
